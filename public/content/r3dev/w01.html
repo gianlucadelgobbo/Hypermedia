@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<TITLE>DMG:I.O*</TITLE>
+<script>window.RufflePlayer = window.RufflePlayer || {}; window.RufflePlayer.config = { autoplay: "on", unmuteOverlay: "hidden" };</script>
+<script src="/ruffle/ruffle.js"></script>
+<script language="JavaScript">
+function openWindow(theURL,winName, w, h) {
+	window.parent.document.getElementById('right').src = 'content/r3dev/' + theURL
+}
+
+function calcXYm() {
+	if (is.ie) {
+		sx=window.event.screenX //-window.event.clientX
+		sy=window.event.screenY //-window.event.clientY
+	}
+}
+
+function calcXY() {
+	if (is.ie) {
+		sx=window.event.screenX-window.event.clientX
+		sy=window.event.screenY-window.event.clientY
+	}
+}
+
+function BrowserCheck() {
+    var b = navigator.appName
+    if (b=="Netscape") this.b = "ns"
+    else if (b=="Microsoft Internet Explorer") this.b = "ie"
+    else this.b = b
+    this.version = navigator.appVersion
+    this.v = parseInt(this.version)
+    this.ns = (this.b=="ns" && this.v>=4)
+    this.ns4 = (this.b=="ns" && this.v==4)
+    this.ns5 = (this.b=="ns" && this.v==5)
+    this.ie = (this.b=="ie" && this.v>=4)
+    this.ie4 = (this.version.indexOf('MSIE 4')>0)
+    this.ie5 = (this.version.indexOf('MSIE 5')>0)
+    this.min = (this.ns||this.ie)
+}
+
+is = new BrowserCheck()
+var sx=0,sy=0
+
+</script>
+</HEAD>
+<BODY bgcolor="#000000" marginwidth="0" marginheight="0" topmargin="0" leftmargin="0" onBlur="calcXY();" onMove="calcXYm();" onLoad="self.focus();" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+<OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash2/cabs/swflash.cab#version=4,0,0,0" ID=windowLeft01 WIDTH=360 HEIGHT=290>
+<PARAM NAME=movie VALUE="windowLeft01.swf">
+<PARAM NAME=loop VALUE=false>
+<PARAM NAME=menu VALUE=false>
+<PARAM NAME=quality VALUE=high>
+<PARAM NAME=bgcolor VALUE=#666666>
+<EMBED src="windowLeft01.swf" loop=false menu=false quality=high bgcolor=#666666  WIDTH=360 HEIGHT=290 TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></EMBED>
+</OBJECT>
+</BODY>
+</HTML>

@@ -5,9 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "kiosk": "node server.js & sleep 2 && open -a 'Google Chrome' --args --kiosk --disable-session-crashed-bubble --disable-infobars --noerrdialogs --no-first-run http://localhost:3000"
+    "kiosk": "node server.js & sleep 2 && open -a 'Google Chrome' --args --kiosk --disable-session-crashed-bubble --disable-infobars --noerrdialogs --no-first-run --autoplay-policy=no-user-gesture-required http://localhost:3000"
   },
   "dependencies": {
+    "@ruffle-rs/ruffle": "^0.6.0",
     "express": "^4.19.2"
   }
 }
