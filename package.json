@@ -1,0 +1,13 @@
+{
+  "name": "hypermedia-kiosk",
+  "version": "1.0.0",
+  "description": "MAM Hypermedia exhibition kiosk",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "kiosk": "node server.js & sleep 2 && open -a 'Google Chrome' --args --kiosk --disable-session-crashed-bubble --disable-infobars --noerrdialogs --no-first-run http://localhost:3000"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
