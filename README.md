@@ -1,35 +1,35 @@
 # Hypermedia — Net Art
 
-Sezione **Net Art** della mostra *Hypermedia* al **MAM – Media Art Museum** di Roma.
+**Net Art** section of the *Hypermedia* exhibition at **MAM – Media Art Museum** in Rome.
 
-Opere storiche in Flash (SWF) degli anni 2000, riprodotte nel browser tramite [Ruffle](https://ruffle.rs), l'emulatore Flash open source, e presentate in postazioni kiosk a schermo intero.
+Historic Flash (SWF) works from the 2000s, played in the browser through [Ruffle](https://ruffle.rs), the open-source Flash emulator, and shown on full-screen kiosk stations.
 
-## Opere
+## Works
 
-| Opera | Autore | Pagina | Launcher Windows |
+| Work | Artist | Page | Windows launcher |
 |---|---|---|---|
 | Schematic Beta | PrayStation Joshua Davis | `praystation.html` | `start-praystation.bat` |
 | DMGI.O | GMUNK (Bradley G. Munkowitz) | `r3dev.html` | `start-gmunk.bat` |
 | Simian6 | Ross Mawdsley | `simian6.html` | `start-simian6.bat` |
 
-La galleria con tutte le opere è in `index.html`.
+The gallery of all works is in `index.html`.
 
-## Struttura
+## Structure
 
 ```
-server.js            server Express statico (porta 3000)
-public/              pagine delle opere e galleria
-public/content/      file SWF e asset delle opere
-start-*.bat          avvio kiosk su Windows, un'opera per postazione
+server.js            static Express server (port 3000)
+public/              work pages and gallery
+public/content/      SWF files and assets for each work
+start-*.bat          Windows kiosk launchers, one work per station
 ```
 
-I file `.swf` nella radice di `public/` (`61.swf`…`67a.swf`, `A.swf`, `news1-6.swf`) fanno parte di **Simian6**: il filmato principale (`content/simian6/swf/start.swf`) li carica con percorsi relativi alla root del sito, quindi devono restare lì.
+The `.swf` files in the root of `public/` (`61.swf`…`67a.swf`, `A.swf`, `news1-6.swf`) belong to **Simian6**: the main movie (`content/simian6/swf/start.swf`) loads them with paths relative to the site root, so they must stay there.
 
-Ruffle è installato via npm (`@ruffle-rs/ruffle`) e servito dal server su `/ruffle`.
+Ruffle is installed via npm (`@ruffle-rs/ruffle`) and served by the server at `/ruffle`.
 
-## Avvio
+## Running
 
-Requisiti: Node.js e Google Chrome.
+Requirements: Node.js and Google Chrome.
 
 ```bash
 npm install
@@ -38,7 +38,7 @@ npm start          # http://localhost:3000
 
 ### Kiosk
 
-- **Windows**: doppio clic su `start-<opera>.bat`. Avvia il server e apre Chrome in modalità kiosk sull'opera; alla chiusura di Chrome il server viene terminato.
-- **macOS**: `npm run kiosk` apre la galleria in Chrome a schermo intero.
+- **Windows**: double-click `start-<work>.bat`. It starts the server and opens Chrome in kiosk mode on that work; when Chrome closes, the server is stopped.
+- **macOS**: `npm run kiosk` opens the gallery in full-screen Chrome.
 
-Chrome viene avviato con `--autoplay-policy=no-user-gesture-required` perché l'audio parta senza interazione.
+Chrome is launched with `--autoplay-policy=no-user-gesture-required` so audio starts without user interaction.
