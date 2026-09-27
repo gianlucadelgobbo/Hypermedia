@@ -23,6 +23,8 @@ public/content/      file SWF e asset delle opere
 start-*.bat          avvio kiosk su Windows, un'opera per postazione
 ```
 
+I file `.swf` nella radice di `public/` (`61.swf`…`67a.swf`, `A.swf`, `news1-6.swf`) fanno parte di **Simian6**: il filmato principale (`content/simian6/swf/start.swf`) li carica con percorsi relativi alla root del sito, quindi devono restare lì.
+
 Ruffle è installato via npm (`@ruffle-rs/ruffle`) e servito dal server su `/ruffle`.
 
 ## Avvio
