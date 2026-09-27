@@ -8,9 +8,9 @@ Opere storiche in Flash (SWF) degli anni 2000, riprodotte nel browser tramite [R
 
 | Opera | Autore | Pagina | Launcher Windows |
 |---|---|---|---|
-| PrayStation | Joshua Davis | `praystation.html` | `start-praystation.bat` |
-| R3:DEV | gmunk | `r3dev.html` | `start-gmunk.bat` |
-| Simian6 | | `simian6.html` | `start-simian6.bat` |
+| Schematic Beta | PrayStation Joshua Davis | `praystation.html` | `start-praystation.bat` |
+| DMGI.O | GMUNK (Bradley G. Munkowitz) | `r3dev.html` | `start-gmunk.bat` |
+| Simian6 | Ross Mawdsley | `simian6.html` | `start-simian6.bat` |
 
 La galleria con tutte le opere è in `index.html`.
 
