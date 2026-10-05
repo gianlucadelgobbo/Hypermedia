@@ -1,0 +1,5 @@
+Windows Registry Editor Version 5.00
+
+; Riattiva i tasti Windows (serve il riavvio)
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
+"Scancode Map"=-

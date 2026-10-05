@@ -1,0 +1,113 @@
+HYPERMEDIA - NET ART - MAM Media Art Museum, Roma
+GUIDA RAPIDA: PREPARARE UN NUOVO PC KIOSK (Windows 10/11)
+==========================================================
+
+Ogni PC mostra una sola opera:
+  praystation  = Schematic Beta - PrayStation Joshua Davis
+  gmunk        = DMGI.O - GMUNK
+  simian6      = Simian6 - Ross Mawdsley
+
+
+1. INSTALLARE I PROGRAMMI
+-------------------------
+Aprire PowerShell e lanciare:
+
+  winget install --id Google.Chrome -e
+  winget install --id OpenJS.NodeJS.LTS -e
+  winget install --id Git.Git -e
+
+Chiudere e riaprire PowerShell, poi verificare:
+
+  git --version
+  node --version
+
+
+2. SCARICARE IL PROGETTO
+------------------------
+In PowerShell:
+
+  cd C:\Users\utente\Documents
+  git clone https://github.com/gianlucadelgobbo/Hypermedia.git
+  cd Hypermedia
+  npm install
+
+Se npm da' un errore sugli script disabilitati, lanciare una volta:
+
+  Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+
+e ripetere npm install.
+
+
+3. PROVARE L'OPERA
+------------------
+Doppio clic su start-<opera>.bat (es. start-praystation.bat).
+Dopo qualche secondo l'opera si apre a schermo intero.
+
+Per uscire dalla prova:
+  - Alt+Tab fino alla finestra nera "Hypermedia Kiosk" e chiuderla
+  - Alt+F4 per chiudere Chrome
+  - chiudere anche la finestra "Hypermedia Server" nella barra in basso
+(Se si chiude solo Chrome, si riapre da solo dopo 2 secondi: e' voluto.)
+
+
+4. ACCESSO AUTOMATICO (senza password)
+--------------------------------------
+Il PC deve entrare in Windows da solo all'accensione.
+
+  - in PowerShell:
+      winget install --id Microsoft.Sysinternals.Autologon -e
+  - aprire "Autologon" dal menu Start
+  - inserire nome utente e password, cliccare Enable
+
+Se l'account non ha password, Windows entra gia' da solo:
+saltare questo passaggio.
+Per disattivarlo: riaprire Autologon e cliccare Disable.
+
+
+5. NIENTE STANDBY NE' SCHERMO SPENTO
+------------------------------------
+In PowerShell:
+
+  powercfg /change monitor-timeout-ac 0
+  powercfg /change standby-timeout-ac 0
+
+In Impostazioni > Windows Update impostare l'orario di attivita'
+sulle ore di apertura del museo, per evitare riavvii durante la mostra.
+
+
+6. BLOCCARE IL TASTO WINDOWS
+----------------------------
+Doppio clic su BloccaKiosk.reg e confermare (chiede i permessi
+di amministratore). Vale dopo il riavvio.
+
+
+7. ATTIVARE IL KIOSK
+--------------------
+Doppio clic su AttivaKiosk.bat, scrivere il nome dell'opera
+(praystation, gmunk o simian6) e premere Invio.
+
+Riavviare il PC: al posto del desktop parte solo l'opera.
+Se un visitatore chiude Chrome, l'opera si riapre da sola.
+
+
+MANUTENZIONE
+============
+
+Tornare al desktop (senza disattivare il kiosk):
+  - Ctrl+Alt+Canc > Gestione attivita'
+  - File (o "Esegui nuova attivita'") > scrivere explorer.exe > OK
+Al prossimo riavvio il PC torna in modalita' kiosk.
+
+Aggiornare il progetto (dal desktop, in PowerShell):
+  cd C:\Users\utente\Documents\Hypermedia
+  git pull
+  npm install
+poi riavviare.
+
+Cambiare opera sul PC:
+  rilanciare AttivaKiosk.bat con la nuova opera e riavviare.
+
+Togliere il kiosk e tornare al PC normale:
+  - doppio clic su DisattivaKiosk.bat
+  - doppio clic su SbloccaKiosk.reg
+  - riavviare

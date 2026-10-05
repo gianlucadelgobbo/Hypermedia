@@ -38,7 +38,8 @@ npm start          # http://localhost:3000
 
 ### Kiosk
 
-- **Windows**: double-click `start-<work>.bat`. It starts the server and opens Chrome in kiosk mode on that work; when Chrome closes, the server is stopped.
+- **Windows**: double-click `start-<work>.bat`. It starts the server and opens Chrome in kiosk mode on that work (via `kiosk.bat`); if Chrome is closed it reopens, and the server is restarted if it stopped.
+- **Dedicated station**: `AttivaKiosk.bat` replaces the Windows desktop with the chosen work at login; `DisattivaKiosk.bat` restores it. `BloccaKiosk.reg` / `SbloccaKiosk.reg` disable / re-enable the Windows key. Full setup steps (in Italian) are in `guidaRapida.txt`.
 - **macOS**: `npm run kiosk` opens the gallery in full-screen Chrome.
 
 Chrome is launched with `--autoplay-policy=no-user-gesture-required` so audio starts without user interaction.
