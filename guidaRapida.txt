@@ -47,7 +47,7 @@ Per uscire dalla prova:
   - Alt+Tab fino alla finestra nera "Hypermedia Kiosk" e chiuderla
   - Alt+F4 per chiudere Chrome
   - chiudere anche la finestra "Hypermedia Server" nella barra in basso
-(Se si chiude solo Chrome, si riapre da solo dopo 2 secondi: e' voluto.)
+(Se si chiude solo Chrome, si riapre da solo entro 5 secondi: e' voluto.)
 
 
 4. ACCESSO AUTOMATICO (senza password)
