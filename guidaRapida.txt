@@ -104,6 +104,10 @@ Aggiornare il progetto (dal desktop, in PowerShell):
   npm install
 poi riavviare.
 
+Leggere il log (finestre trovate, pagine caricate, riavvii):
+  aprire C:\Users\utente\Documents\Hypermedia\logs\kiosk.log
+  con il Blocco note.
+
 Cambiare opera sul PC:
   rilanciare AttivaKiosk.bat con la nuova opera e riavviare.
 

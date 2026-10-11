@@ -1,8 +1,23 @@
 // Kiosk helpers, included in every work page (and in iframes).
-// - blocks new windows: in kiosk mode they open full screen and trap the visitor
+// - blocks new windows and window.close: in kiosk mode they trap the visitor
+// - logs page loads and blocked calls to the server (logs/kiosk.log)
 // - reports visitor activity to the server, which restarts the work when idle
 (function () {
-  window.open = function () { return null }
+  var where = location.pathname + (window === window.top ? '' : ' (iframe)')
+
+  function log(msg) {
+    navigator.sendBeacon('/kiosk/log', where + ': ' + msg)
+  }
+
+  window.open = function (url, name) {
+    log('blocked window.open(' + JSON.stringify(url) + ', ' + JSON.stringify(name) + ')')
+    return null
+  }
+  window.close = function () {
+    log('blocked window.close()')
+  }
+
+  log('loaded ' + location.href)
 
   var last = 0
   function activity() {

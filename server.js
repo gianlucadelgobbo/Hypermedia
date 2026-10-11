@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+const fs = require('fs')
 const app = express()
 const PORT = process.env.PORT || 3000
 
@@ -11,6 +12,19 @@ const WATCH_MS = 5 * 1000
 const IDLE_MS = 5 * 60 * 1000
 
 let lastActivity = Date.now()
+let lastTabs = ''
+
+// Log to console and logs/kiosk.log (rotated to kiosk.old.log at startup when over 5 MB)
+const LOG_FILE = path.join(__dirname, 'logs', 'kiosk.log')
+fs.mkdirSync(path.dirname(LOG_FILE), { recursive: true })
+try {
+  if (fs.statSync(LOG_FILE).size > 5 * 1024 * 1024) fs.renameSync(LOG_FILE, LOG_FILE.replace('.log', '.old.log'))
+} catch {}
+function log(msg) {
+  const line = `${new Date().toLocaleString('sv-SE')} ${msg}`
+  console.log(line)
+  fs.appendFile(LOG_FILE, line + '\n', () => {})
+}
 
 app.use('/ruffle', express.static(path.join(__dirname, 'node_modules/@ruffle-rs/ruffle')))
 app.use(express.static(path.join(__dirname, 'public')))
@@ -21,9 +35,16 @@ app.post('/kiosk/activity', (req, res) => {
   res.sendStatus(204)
 })
 
+// Page events, sent by kiosk.js (loads, blocked window.open/close)
+app.post('/kiosk/log', express.text({ type: '*/*' }), (req, res) => {
+  log(`page ${String(req.body).slice(0, 500)}`)
+  res.sendStatus(204)
+})
+
 // Unknown page on a kiosk station: back to the work
 app.use((req, res) => {
   if (KIOSK_HOME && req.method === 'GET' && (req.headers.accept || '').includes('text/html')) {
+    log(`404 ${req.originalUrl} (referer: ${req.headers.referer || '-'}): redirecting to the work`)
     return res.redirect(`/${KIOSK_HOME}`)
   }
   res.sendStatus(404)
@@ -39,24 +60,32 @@ async function watchChrome() {
     return // Chrome not running: kiosk.bat will relaunch it
   }
 
+  const tabs = pages.map(p => p.url).join(' | ')
+  if (tabs !== lastTabs) {
+    log(`tabs (${pages.length}): ${tabs || '-'}`)
+    lastTabs = tabs
+  }
+
   const idle = Date.now() - lastActivity >= IDLE_MS
   const good = idle ? [] : pages.filter(p => p.url === HOME_URL)
   const keep = good[0]
 
   if (!keep) {
-    console.log(idle ? 'Idle: restarting work' : `Off the work (${pages.map(p => p.url).join(', ')}): restoring`)
+    log(idle ? 'idle: restarting the work' : 'off the work: restoring')
     await fetch(`${DEVTOOLS}/json/new?${HOME_URL}`, { method: 'PUT' })
     lastActivity = Date.now()
   }
   for (const p of pages) {
-    if (p !== keep) await fetch(`${DEVTOOLS}/json/close/${p.id}`)
+    if (p === keep) continue
+    log(`closing tab ${p.url}`)
+    await fetch(`${DEVTOOLS}/json/close/${p.id}`)
   }
 }
 
 app.listen(PORT, () => {
-  console.log(`Hypermedia kiosk running at http://localhost:${PORT}`)
+  log(`server started on http://localhost:${PORT}`)
   if (KIOSK_HOME) {
-    console.log(`Kiosk watchdog on ${HOME_URL}`)
-    setInterval(() => watchChrome().catch(err => console.error('Watchdog:', err.message)), WATCH_MS)
+    log(`kiosk watchdog on ${HOME_URL}`)
+    setInterval(() => watchChrome().catch(err => log(`watchdog error: ${err.message}`)), WATCH_MS)
   }
 })
