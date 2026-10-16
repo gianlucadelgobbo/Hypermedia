@@ -6,6 +6,7 @@ Ogni PC mostra una sola opera:
   praystation  = Schematic Beta - PrayStation Joshua Davis
   gmunk        = DMGI.O - GMUNK
   simian6      = Simian6 - Ross Mawdsley
+  missa73      = Missa73 - deliriouniversale.com(a)
 
 
 1. INSTALLARE I PROGRAMMI
@@ -84,7 +85,7 @@ di amministratore). Vale dopo il riavvio.
 7. ATTIVARE IL KIOSK
 --------------------
 Doppio clic su AttivaKiosk.bat, scrivere il nome dell'opera
-(praystation, gmunk o simian6) e premere Invio.
+(praystation, gmunk, simian6 o missa73) e premere Invio.
 
 Riavviare il PC: al posto del desktop parte solo l'opera.
 Se un visitatore chiude Chrome, l'opera si riapre da sola.

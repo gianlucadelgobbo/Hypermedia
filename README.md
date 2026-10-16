@@ -11,6 +11,7 @@ Historic Flash (SWF) works from the 2000s, played in the browser through [Ruffle
 | Schematic Beta | PrayStation Joshua Davis | `praystation.html` | `start-praystation.bat` |
 | DMGI.O | GMUNK (Bradley G. Munkowitz) | `r3dev.html` | `start-gmunk.bat` |
 | Simian6 | Ross Mawdsley | `simian6.html` | `start-simian6.bat` |
+| Missa73 | deliriouniversale.com(a) | `missa73.html` | `start-missa73.bat` |
 
 The gallery of all works is in `index.html`.
 

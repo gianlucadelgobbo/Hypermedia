@@ -1,7 +1,7 @@
 @echo off
 rem All'accensione al posto del desktop parte solo l'opera scelta.
 set OPERA=%~1
-if "%OPERA%"=="" set /p OPERA=Quale opera? (praystation, gmunk, simian6): 
+if "%OPERA%"=="" set /p OPERA=Quale opera? (praystation, gmunk, simian6, missa73): 
 if not exist "%~dp0start-%OPERA%.bat" (
   echo Opera sconosciuta: %OPERA%
   pause
