@@ -91,6 +91,20 @@ Riavviare il PC: al posto del desktop parte solo l'opera.
 Se un visitatore chiude Chrome, l'opera si riapre da sola.
 
 
+8. SPEGNERE E RIAVVIARE DA STREAM DECK (OSC)
+-------------------------------------------
+In PowerShell da amministratore, una volta per PC, aprire la porta:
+
+  netsh advfirewall firewall add rule name="Hypermedia OSC" dir=in action=allow protocol=UDP localport=9000
+
+Dallo Stream Deck (plugin OSC) mandare, sulla porta 9000:
+  /hypermedia/shutdown   = spegne il PC
+  /hypermedia/reboot     = riavvia il PC
+All'indirizzo IP di un PC per comandare solo quello, oppure
+all'indirizzo broadcast della rete (es. 192.168.1.255) per tutti.
+Ogni comando ricevuto viene scritto nel log.
+
+
 MANUTENZIONE
 ============
 

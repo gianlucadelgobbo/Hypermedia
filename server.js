@@ -1,6 +1,8 @@
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
+const dgram = require('dgram')
+const { exec } = require('child_process')
 const app = express()
 const PORT = process.env.PORT || 3000
 
@@ -81,6 +83,25 @@ async function watchChrome() {
     await fetch(`${DEVTOOLS}/json/close/${p.id}`)
   }
 }
+
+// OSC remote control (e.g. from a Stream Deck), UDP port 9000:
+// /hypermedia/shutdown and /hypermedia/reboot. Sent to the LAN broadcast address it reaches every station.
+const OSC_PORT = process.env.OSC_PORT || 9000
+const OSC_COMMANDS = {
+  '/hypermedia/shutdown': 'shutdown /s /f /t 0',
+  '/hypermedia/reboot': 'shutdown /r /f /t 0',
+}
+const osc = dgram.createSocket({ type: 'udp4', reuseAddr: true })
+osc.on('message', (msg, from) => {
+  const address = msg.toString('latin1', 0, msg.indexOf(0) < 0 ? msg.length : msg.indexOf(0))
+  const command = OSC_COMMANDS[address]
+  log(`osc ${address} from ${from.address}${command ? '' : ' (ignored)'}`)
+  if (!command) return
+  if (process.platform !== 'win32') return log(`osc: not on Windows, skipping "${command}"`)
+  exec(command, err => err && log(`osc error: ${err.message}`))
+})
+osc.on('error', err => log(`osc error: ${err.message}`))
+osc.bind(OSC_PORT, () => log(`osc listening on udp ${OSC_PORT}`))
 
 app.listen(PORT, () => {
   log(`server started on http://localhost:${PORT}`)
