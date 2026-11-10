@@ -12,6 +12,7 @@ Historic Flash (SWF) works from the 2000s, played in the browser through [Ruffle
 | DMGI.O | GMUNK (Bradley G. Munkowitz) | `r3dev.html` | `start-gmunk.bat` |
 | Simian6 | Ross Mawdsley | `simian6.html` | `start-simian6.bat` |
 | Missa73 | deliriouniversale.com(a) | `missa73.html` | `start-missa73.bat` |
+| FLxER | — | Windows app `FLxER6.exe` (not Chrome) | `start-flxer.bat` |
 
 The gallery of all works is in `index.html`.
 
@@ -41,6 +42,7 @@ npm start          # http://localhost:3000
 
 - **Windows**: double-click `start-<work>.bat`. It starts the server and opens Chrome in kiosk mode on that work (via `kiosk.bat`); if Chrome is closed it reopens, and the server is restarted if it stopped. The server also watches Chrome through its DevTools port (`--remote-debugging-port=9222`): every 5 seconds it keeps exactly one tab open on the work (closing new windows, error pages and external sites) and restarts the work after 5 minutes without visitor input (reported by `public/kiosk.js`).
 - **Dedicated station**: `AttivaKiosk.bat` replaces the Windows desktop with the chosen work at login; `DisattivaKiosk.bat` restores it. `FermaKiosk.bat` stops the kiosk until the next reboot (the relaunch loop, Chrome and the server) and opens the desktop. `BloccaKiosk.reg` / `SbloccaKiosk.reg` disable / re-enable the Windows key. Full setup steps (in Italian) are in `guidaRapida.txt`.
+- **FLxER station**: `start-flxer.bat` keeps the FLxER6 Windows app open instead of Chrome, and runs the server only for OSC remote control (no watchdog without `KIOSK_HOME`).
 - **Remote control (OSC)**: the server listens for OSC on UDP port 9000 (`OSC_PORT`): `/hypermedia/shutdown` turns the PC off, `/hypermedia/reboot` restarts it, `/hypermedia/stop` runs `FermaKiosk.bat` (Windows only; logged on other systems). Send to a station's IP, or to the LAN broadcast address (e.g. `192.168.1.255`) to reach every station at once, for instance from a Stream Deck OSC plugin.
 - **macOS**: `npm run kiosk` opens the gallery in full-screen Chrome.
 

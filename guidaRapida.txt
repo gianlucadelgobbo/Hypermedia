@@ -7,6 +7,7 @@ Ogni PC mostra una sola opera:
   gmunk        = DMGI.O - GMUNK
   simian6      = Simian6 - Ross Mawdsley
   missa73      = Missa73 - deliriouniversale.com(a)
+  flxer        = FLxER (app Windows FLxER6, non Chrome: vedi in fondo)
 
 
 1. INSTALLARE I PROGRAMMI
@@ -85,7 +86,7 @@ di amministratore). Vale dopo il riavvio.
 7. ATTIVARE IL KIOSK
 --------------------
 Doppio clic su AttivaKiosk.bat, scrivere il nome dell'opera
-(praystation, gmunk, simian6 o missa73) e premere Invio.
+(praystation, gmunk, simian6, missa73 o flxer) e premere Invio.
 
 Riavviare il PC: al posto del desktop parte solo l'opera.
 Se un visitatore chiude Chrome, l'opera si riapre da sola.
@@ -133,3 +134,16 @@ Togliere il kiosk e tornare al PC normale:
   - doppio clic su DisattivaKiosk.bat
   - doppio clic su SbloccaKiosk.reg
   - riavviare
+
+
+PC FLXER (MAM5)
+===============
+Al posto di Chrome tiene aperta l'app FLxER6
+(C:\Program Files (x86)\FLxER6\FLxER6.exe, gia' installata).
+Il server gira lo stesso per i comandi OSC (spegni, riavvia, stop).
+Seguire i passi 1, 2, 4, 5, 6 e 8 (Chrome non serve), poi al passo 7
+scrivere flxer. AttivaKiosk.bat va lanciato dall'utente del kiosk.
+Se l'utente non e' amministratore, installazioni, BloccaKiosk.reg e
+regola del firewall chiedono la password di un amministratore.
+Il proiettore (BenQ SP870) non si comanda in rete: nel suo menu
+impostare Auto Power Off, cosi' si spegne da solo poco dopo il PC.
