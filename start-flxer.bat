@@ -6,7 +6,8 @@ cd /d "%~dp0"
 set FLXER_DIR=C:\Program Files (x86)\FLxER6
 :loop
 tasklist /fi "imagename eq node.exe" | find /i "node.exe" >nul || (
-  start "Hypermedia Server" /min node server.js
+  rem nascosto: senza barra delle applicazioni una finestra ridotta resterebbe sopra FLxER
+  powershell -NoProfile -Command "Start-Process node -ArgumentList server.js -WindowStyle Hidden"
   timeout /t 3 /nobreak >nul
 )
 tasklist /fi "imagename eq FLxER6.exe" | find /i "FLxER6.exe" >nul || start "" /d "%FLXER_DIR%" "%FLXER_DIR%\FLxER6.exe"
