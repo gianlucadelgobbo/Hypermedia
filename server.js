@@ -85,11 +85,13 @@ async function watchChrome() {
 }
 
 // OSC remote control (e.g. from a Stream Deck), UDP port 9000:
-// /hypermedia/shutdown and /hypermedia/reboot. Sent to the LAN broadcast address it reaches every station.
+// /hypermedia/shutdown, /hypermedia/reboot and /hypermedia/stop (FermaKiosk.bat). Sent to the LAN broadcast address it reaches every station.
 const OSC_PORT = process.env.OSC_PORT || 9000
 const OSC_COMMANDS = {
   '/hypermedia/shutdown': 'shutdown /s /f /t 0',
   '/hypermedia/reboot': 'shutdown /r /f /t 0',
+  // start detaches the script, which also ends this server
+  '/hypermedia/stop': `start "" "${path.join(__dirname, 'FermaKiosk.bat')}"`,
 }
 const osc = dgram.createSocket({ type: 'udp4', reuseAddr: true })
 osc.on('message', (msg, from) => {

@@ -100,6 +100,7 @@ In PowerShell da amministratore, una volta per PC, aprire la porta:
 Dallo Stream Deck (plugin OSC) mandare, sulla porta 9000:
   /hypermedia/shutdown   = spegne il PC
   /hypermedia/reboot     = riavvia il PC
+  /hypermedia/stop       = ferma il kiosk e apre il desktop
 All'indirizzo IP di un PC per comandare solo quello, oppure
 all'indirizzo broadcast della rete (es. 192.168.1.255) per tutti.
 Ogni comando ricevuto viene scritto nel log.
@@ -108,10 +109,12 @@ Ogni comando ricevuto viene scritto nel log.
 MANUTENZIONE
 ============
 
-Tornare al desktop (senza disattivare il kiosk):
-  - Ctrl+Alt+Canc > Gestione attivita'
-  - File (o "Esegui nuova attivita'") > scrivere explorer.exe > OK
-Al prossimo riavvio il PC torna in modalita' kiosk.
+Fermare il kiosk e tornare al desktop (fino al prossimo riavvio):
+  - da Companion: mandare /hypermedia/stop al PC, oppure
+  - Ctrl+Alt+Canc > Gestione attivita' > "Esegui nuova attivita'" >
+    scrivere C:\Users\utente\Documents\Hypermedia\FermaKiosk.bat > OK
+Chiude il ciclo che riapre l'opera, Chrome e il server, poi apre
+il desktop. Al prossimo riavvio il PC torna in modalita' kiosk.
 
 Aggiornare il progetto (dal desktop, in PowerShell):
   cd C:\Users\utente\Documents\Hypermedia
